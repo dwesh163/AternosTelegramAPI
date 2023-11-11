@@ -40,9 +40,6 @@ def info(update, context):
         data = json.load(jsonFile)
 
     for srv in srvs:
-
-        print(update.message.from_user["id"], data[srv.servid])
-
         if(str(update.message.from_user["id"]) in data[srv.servid]):
 
             srv.fetch()
@@ -59,6 +56,39 @@ def info(update, context):
         
             update.message.reply_text(response)
 
+def getAllServeur():
+    atclient = Client()
+    aternos = atclient.account
+    atclient.login_with_session(os.getenv("ATERNOS_SESSION_COOKIE"))
+    srvs = aternos.list_servers()
+
+    response = ""
+
+    for srv in srvs:
+        srv.fetch()
+        response += f'{srv.domain} -- {srv.servid}\n'
+    
+    return response
+
+def add(update, context):
+    with open("data.json", "r") as jsonFile:
+        data = json.load(jsonFile)
+
+    if(len(context.args) == 2):
+        if(context.args[0] in data):
+            data[context.args[0]].append(context.args[1])
+            with open("data.json", "w") as jsonFile:
+                json.dump(data, jsonFile, indent=2)
+            update.message.reply_text("goof")
+        else:
+            update.message.reply_text(getAllServeur())
+    else:
+        update.message.reply_text(getAllServeur())
+
+
+
+
+
 
 def main():
 
@@ -71,6 +101,7 @@ def main():
     dp.add_handler(CommandHandler("help", help))
 
     dp.add_handler(CommandHandler("info", info))
+    dp.add_handler(CommandHandler("add", add))
 
 
     # Run bot

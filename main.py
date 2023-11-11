@@ -15,6 +15,9 @@ TOKEN =  os.getenv('BOT_ATERNOS_TOKEN')
 def start(update, context):
     update.message.reply_text("Hello I'm a bot...")
 
+def help(update, context):
+    update.message.reply_text("list of command")
+
 def main():
 
     updater = Updater(TOKEN, use_context=True)
@@ -23,6 +26,7 @@ def main():
 
     # Base Command
     dp.add_handler(CommandHandler("start", start))
+    dp.add_handler(CommandHandler("help", help))
 
     # Run bot
     updater.start_polling()

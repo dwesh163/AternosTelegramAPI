@@ -9,7 +9,8 @@ aternos = atclient.account
 atclient.login_with_session(os.getenv("ATERNOS_SESSION_COOKIE"))
 srvs = aternos.list_servers()
 
-TOKEN = os.getenv('BOT_ATERNOS_TOKEN')
+load_dotenv()
+TOKEN =  os.getenv('BOT_ATERNOS_TOKEN')
 
 def start(update, context):
     update.message.reply_text("Hello I'm a bot...")

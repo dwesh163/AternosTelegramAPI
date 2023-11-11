@@ -1,0 +1,6 @@
+services:
+  AternosTelegramAPI:
+    build: .
+    volumes:
+      - .:/usr/src/app
+    restart: unless-stopped

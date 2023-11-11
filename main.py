@@ -52,6 +52,13 @@ def info(update, context):
         if(str(update.message.from_user["id"]) in data[srv.servid]):
 
             srv.fetch()
+
+            if (srv.edition == 0):
+                version = "Java"
+            else:
+                version = "Bedrock"
+
+
             response  = f'*** {srv.subdomain} ***\n'
             response += re.sub(r'§\d', '', srv.motd)
             response += "\n"
@@ -59,7 +66,7 @@ def info(update, context):
             response += f'*** address: {srv.domain}\n'
             response += f'*** Port: {srv.port}\n'
             response += f'*** Minecraft: {srv.software} {srv.version}\n'
-            response += f'*** Version: {srv.edition}\n'
+            response += f'*** Version: {version}\n'
             response += f'*** Id: {srv.servid}\n'
             response += f'*** Full address: {srv.address}\n'
         

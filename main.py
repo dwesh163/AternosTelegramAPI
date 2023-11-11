@@ -24,10 +24,19 @@ if not os.path.isfile("data.json"):
 
 
 def start(update, context):
-    update.message.reply_text("Hello I'm a bot...")
+    update.message.reply_text("Hello! I'm a bot designed to assist with Aternos servers.\n\n"
+                              "- If you need help, you can use the /help command for a list of available commands.\n\n"
+                              "- If you are a guest, please ask the administrator to give you access.\n\n"
+                              "- If you wish to manage your own server, please see https://github.com/dwesh163/AternosTelegramAPI\n")
 
 def help(update, context):
-    update.message.reply_text("list of command")
+    update.message.reply_text("Available commands:\n"
+                              "/open : Start the Aternos server\n"
+                              "/start : Start the bot\n"
+                              "/help : Display the list of available commands\n"
+                              "/info : Get information about your Aternos server\n"
+                              "/add <server_id> <telegram_user_id> : Add a user as an admin for a server\n"
+                              )
 
 def info(update, context):
 

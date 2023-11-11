@@ -85,9 +85,19 @@ def add(update, context):
     else:
         update.message.reply_text(getAllServeur())
 
+def startServeur(update, context):
+    atclient = Client()
+    aternos = atclient.account
+    atclient.login_with_session(os.getenv("ATERNOS_SESSION_COOKIE"))
+    srvs = aternos.list_servers()
 
-
-
+    for srv in srvs:
+        srv.fetch()
+        try:
+            srv.start()
+            update.message.reply_text(f'{srv.subdomain} is starting up')
+        except:
+            update.message.reply_text(f'The {srv.subdomain} server is opening')
 
 
 def main():
@@ -102,7 +112,7 @@ def main():
 
     dp.add_handler(CommandHandler("info", info))
     dp.add_handler(CommandHandler("add", add))
-
+    dp.add_handler(CommandHandler("open", startServeur))
 
     # Run bot
     updater.start_polling()

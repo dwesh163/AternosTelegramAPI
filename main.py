@@ -11,11 +11,17 @@ srvs = aternos.list_servers()
 
 TOKEN = os.getenv('BOT_ATERNOS_TOKEN')
 
+def start(update, context):
+    update.message.reply_text("Hello I'm a bot...")
+
 def main():
 
     updater = Updater(TOKEN, use_context=True)
 
     dp = updater.dispatcher
+
+    # Base Command
+    dp.add_handler(CommandHandler("start", start))
 
     # Run bot
     updater.start_polling()

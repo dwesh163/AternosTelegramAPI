@@ -1,5 +1,5 @@
 services:
-  AternosTelegramAPI:
+  docker:
     build: .
     volumes:
       - .:/usr/src/app
